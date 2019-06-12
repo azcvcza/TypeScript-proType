@@ -17,8 +17,8 @@ const sayHello:Function = (name)=>{
 	console.log("hello + ",name);
 }
 sayHello(sherlock.name);
-
-enum VehicleType  {
+/*
+enum VehicleType1  {
 	pedalCycle,
 	MotorCycle,
 	Car,
@@ -27,10 +27,10 @@ enum VehicleType  {
 	Lorry
 }
 
-const t_type = VehicleType.Lorry;
+const t_type = VehicleType1.Lorry;
 
-const typeName = VehicleType[t_type];
-
+const typeName = VehicleType1[t_type];
+*/
 interface Monument{
 	name:string;
 	heightInMeters
@@ -47,7 +47,7 @@ monuments.push({
 	heightInMeters:96
 })
 
-function compareMonumentHeight(a:Monument,b:Monument){
+function compareMonumentHeight1(a:Monument,b:Monument){
 	return a.heightInMeters>b.heightInMeters?1:-1;
 }
 
@@ -72,7 +72,7 @@ interface CephalopodDictionary{
 let dictionary:CephalopodDictionary = {};
 
 
-dictionary['octopus vulgaris'] = {hasInk:'true',arms:5,tentacles:4}
+dictionary['octopus vulgaris'] = {hasInk:true,arms:5,tentacles:4}
 
 delete dictionary['octopus vulgaris'];
 
@@ -122,6 +122,7 @@ const options3:NullableOptions = {
 	material:null
 }
 
+/*
 interface House{
 	bedrooms:number;
 	bathrooms:number;
@@ -131,20 +132,20 @@ interface Mansion{
 	bathrooms:number;
 	bulters:number;
 }
-function getProperty():House | Mansion{
+function getProperty1():(House | Mansion):void{
 
 }
 
-const property = getProperty();
+const property = getProperty1();
 const bedroomCount = property.bedrooms;
 const bulterCount = property.bulters;
 
 const workingButlerCount =(<Mansion>property).bulters;
-
-function typeGuardExample(stringnumber:string|number){
-	const a = stringnumber.length;
-	const b = stringnumber.toFixed();
-	if(typeof stringNumber ==='string'){
+*/
+function typeGuardExample1(stringnumber:string|number){
+	//const a = stringnumber.length;
+	//const b = stringnumber.toFixed();
+	if(typeof stringnumber ==='string'){
 		return stringnumber.length;
 	}
 	else{
@@ -152,9 +153,9 @@ function typeGuardExample(stringnumber:string|number){
 	}
 }
 
-function concatenate(items:string[],seperator=',',startAt=0,endAt=items.length){
+function concatenate1(items:string[],seperator=',',startAt=0,endAt=items.length){
 	let result = '';
-	for(let i = beginAt;i<endAt;i++){
+	for(let i = startAt;i<endAt;i++){
 		result += items[i];
 		if(i<(endAt-1)){
 			result+=seperator;
@@ -336,4 +337,52 @@ class RepeatingPlaylist extends PlayList1{
 		}
 	}
 }
+
+abstract class Logger{
+	abstract notify(message:string):void
+	protected getMessage(message:string):string{
+		return `Information:${new Date().toUTCString()}:$message`
+	}
+}
+class ConsoleLogger extends Logger{
+	notify(message){
+		console.log(this.getMessage(message));
+	}
+}
+class InvasiveLogger extends Logger{
+	notify(message){
+		console.log("this:",this.getMessage(message));
+	}
+}
+let Logger1 : Logger;
+
+// error Logger1 = new Logger();
+
+Logger1 = new InvasiveLogger();
+Logger1.notify('Hello World');
+
+class ClickCounter{
+	private count = 0;
+	registerClick(){
+		this.count++;
+		console.log(this.count);
+	}
+}
+const Cc = new ClickCounter();
+document.getElementById('target').onclick = Cc.registerClick;
+
+function reverseT<T>(list:T[]):T[]{
+	const reverseList:T[] = [];
+	for(let i =(list.length-1);i>=0;i--){
+		reverseList.push(list[i]);
+	}
+	return reverseList;
+}
+
+const letters = ['a','b','c','d'];
+const rLetters = reverseT<string>(letters);
+const numbers = [1,2,3,4];
+const rnumbers = reverseT<number>(numbers);
+
+
 
