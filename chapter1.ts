@@ -33,7 +33,7 @@ const typeName = VehicleType1[t_type];
 */
 interface Monument{
 	name:string;
-	heightInMeters
+	heightInMeters:number;
 }
 
 const monuments:Monument[] = [];
