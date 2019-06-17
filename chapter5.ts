@@ -98,23 +98,46 @@ class FictitiousAPI1 {
 		});
 	}
 }
-FictitiousAPI1.getData(1).then(function(data){
+FictitiousAPI1.getData(1).then(function (data) {
 	console.log(data.name);
 })
-FictitiousAPI1.getData(5).then(function(data){
+FictitiousAPI1.getData(5).then(function (data) {
 	console.log(data.name);
-}).catch(function(error){
-	console.log('Caught:'+error);
+}).catch(function (error) {
+	console.log('Caught:' + error);
 })
 Promise.all([
 	FictitiousAPI1.getData(1),
 	FictitiousAPI1.getData(2),
 	FictitiousAPI1.getData(3),
 	FictitiousAPI1.getData(4),
-]).then((values)=>{
-	for(let val of values){
+]).then((values) => {
+	for (let val of values) {
 		console.log(val.name);
 	}
-}).catch((error)=>{
-	console.log('Caught:'+error);
+}).catch((error) => {
+	console.log('Caught:' + error);
 })
+
+export class Ajax {
+	private readonly READY_STATUS_CODE = 4;
+	private isCompleted(request: XMLHttpRequest) {
+		return request.readyState === this.READY_STATUS_CODE;
+	}
+	httpGet(url: string) {
+		return new Promise<XMLHttpRequest>((resolve, reject) => {
+			// Create a request
+			const request = new XMLHttpRequest();
+			// Attach an event listener
+			request.onreadystatechange = () => {
+				if (this.isCompleted(request)) {
+					resolve(request);
+				}
+			};
+			// Specify the HTTP verb and URL
+			request.open('GET', url, true);
+			// Send the request
+			request.send();
+		});
+	}
+} 
