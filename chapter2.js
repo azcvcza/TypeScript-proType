@@ -1,10 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 exports.__esModule = true;
 var First;
 (function (First) {
@@ -105,14 +99,100 @@ exports.Ferry1 = Ferry1;
 function log(target, key, description) {
     console.log(key);
 }
-var Calculator = /** @class */ (function () {
-    function Calculator() {
+/*
+class Calculator{
+    @log
+    square(n:number){
+        return n*n;
     }
-    Calculator.prototype.square = function (n) {
-        return n * n;
+}
+*/
+var OrderedArray = /** @class */ (function () {
+    function OrderedArray(comparer) {
+        this.comparer = comparer;
+        this.items = [];
+    }
+    OrderedArray.prototype.add = function (item) {
+        this.items.push(item);
+        this.items.sort(this.comparer);
     };
-    __decorate([
-        log
-    ], Calculator.prototype, "square");
-    return Calculator;
+    OrderedArray.prototype.getItem = function (index) {
+        if (this.items.length > index) {
+            return this.items[index];
+        }
+        return null;
+    };
+    return OrderedArray;
+}());
+var orderedArray = new OrderedArray();
+orderedArray.add(5);
+orderedArray.add(1);
+orderedArray.add(3);
+var firstItem = orderedArray.getItem(0);
+console.log("first item in orARR", firstItem);
+var OrderedArray1 = (function () {
+    function OrderedArray1(comparer) {
+        this.comparer = comparer;
+        this.items = [];
+    }
+    OrderedArray1.prototype.add = function (item) {
+        this.items.push(item);
+        this.items.sort(this.comparer);
+    };
+    OrderedArray1.prototype.getItem = function (index) {
+        if (this.items.length > index) {
+            return this.items[index];
+        }
+        return null;
+    };
+    return OrderedArray1;
+}());
+function add(a, b) {
+    return a + b;
+}
+var callsFunction = function (cb) {
+    cb('Done');
+    //cb(1)
+};
+/*
+interface DeviceMotionEvent extends Event {
+    readonly acceleration: DeviceAcceleration | null;
+    readonly accelerationIncludingGravity: DeviceAcceleration | null;
+    readonly interval: number | null;
+    readonly rotationRate: DeviceRotationRate | null;
+    initDeviceMotionEvent(type: string, bubbles: boolean, cancelable: boolean, acceleration:
+   DeviceAccelerationDict | null, accelerationIncludingGravity: DeviceAccelerationDict | null,
+   rotationRate: DeviceRotationRateDict | null, interval: number | null): void;
+   }
+   declare var DeviceMotionEvent: {
+    prototype: DeviceMotionEvent;
+    new(typeArg: string, eventInitDict?: DeviceMotionEventInit): DeviceMotionEvent;
+   };
+}
+*/
+var C1 = /** @class */ (function () {
+    function C1() {
+    }
+    C1.prototype.show = function (hint) {
+        return 1;
+    };
+    return C1;
+}());
+var C2 = /** @class */ (function () {
+    function C2(name) {
+        this.name = name;
+    }
+    C2.prototype.show = function (hint) {
+        if (hint === void 0) { hint = 'default'; }
+        return Math.floor(Math.random() * 10);
+    };
+    return C2;
+}());
+var C3 = /** @class */ (function () {
+    function C3() {
+    }
+    C3.prototype.show = function () {
+        return 'Dynamic';
+    };
+    return C3;
 }());
